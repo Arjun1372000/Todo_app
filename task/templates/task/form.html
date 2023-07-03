@@ -1,0 +1,39 @@
+  {% extends 'todo/base.html' %}
+
+  <!-- This is the form used for both creating and updating a task. -->
+
+  {% block title %}{{ title }}{% endblock %}
+
+  {% block content %}
+  <h1 class="mb-6 text-indigo-900 font-medium text-3xl">{{ title }}</h1>
+
+  <!-- The form to be filled by user -->
+
+  <form method="post" action=".">
+
+      <!-- In-built django protection for GET requests -->
+
+      {% csrf_token %}
+
+      <div class="space-y-4">
+
+          <!-- Called the form in the easiest way without beautifying it, as it is used as both create and update form -->
+
+          {{ form.as_p }}
+      </div>
+
+      <!-- To show the errors in form to the user -->
+
+      {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+              {% for field in form %}
+                  {{ field.errors }}
+              {% endfor %}
+
+              {{ form.non_field_errors }}
+            </div>
+      {% endif %}
+
+      <button class="mt-2 py-2 px-8 text-white bg-indigo-950 hover:bg-indigo-500 font-medium rounded-lg">Submit</button>
+  </form>
+  {% endblock %}

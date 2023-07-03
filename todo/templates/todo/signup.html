@@ -1,0 +1,51 @@
+  {% extends 'todo/base.html' %}
+
+  <!-- This is the signup page -->
+
+  {% block title %}Sign up{% endblock %}
+
+  {% block content %}
+  <div class="w-1/2 my-6 mx-auto bg-gray-200 p-6 rounded-xl">
+      <h1 class="mb-6 text-3xl text-indigo-900">Sign up</h1>
+
+      <!-- The Sign-up form -->
+
+      <form method="post" action=".">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="inline-block text-indigo-900 mb-2 ">Username</label><br>
+          {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+          <label class="inline-block text-indigo-900 mb-2">Email</label><br>
+          {{ form.email }}
+        </div>
+
+        <div class="mb-3">
+          <label class="inline-block text-indigo-900 mb-2">Password</label><br>
+          {{ form.password1 }}
+        </div>
+
+        <div class="mb-3">
+          <label class="inline-block text-indigo-900 mb-2">Repeat password</label><br>
+          {{ form.password2 }}
+        </div>
+
+        <!-- To display errors in the signup form to the user -->
+
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+              {% for field in form %}
+                  {{ field.errors }}
+              {% endfor %}
+
+              {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button class="py-2 px-8 text-white bg-indigo-950 hover:bg-indigo-500 font-medium rounded-lg">Submit</button>
+      </form>
+  </div>
+  {% endblock %}

@@ -1,0 +1,31 @@
+  {% extends 'todo/base.html' %}
+
+  <!-- This is the Homepage -->
+
+
+  {% block title %}Welcome{% endblock %}
+
+  {% block content %}
+
+    <!-- Only shown when user is logged in -->
+
+    {% if request.user.is_authenticated %}
+        <div class="mb-2 px-6 py-7 bg-gray-200 rounded-lg">
+            <h2 class="mb-1 text-2xl text-medium">Welcome {{ request.user }}!</h2>
+            <h2 class="mb-1 text-2xl text-medium">You are logged in!</h2>
+            <h2 class="mb-4 text-lg text-indigo-900 text-medium">checkout your tasks:</h2>
+            <a href="{% url 'task:view' %}" class="px-8 py-2 text-white bg-indigo-950 hover:bg-indigo-500 font-medium rounded-lg">Tasks</a>
+
+        </div>
+    {% endif %}
+
+  <!-- Content of Homepage, can be updated as we want -->
+
+  <div class="px-6 py-12 bg-gray-200 rounded-lg">
+      <h2 class="mb-12 text-2xl font-medium text-center text-indigo-950">Homepage</h2>
+      <h2 class="mb-12 text-2xl text-center text-indigo-900">This is a to-do app.</h2>
+      <h2 class="mb-12 text-2xl text-center text-indigo-900">Do you need an app to keep track of your tasks?</h2>
+      <h2 class="mb-12 text-2xl text-center text-indigo-900">If yes, then you are at the right place!</h2>
+      <h2 class="mb-12 text-2xl text-center text-indigo-900">You can create, update and delete your tasks at our web-app!</h2>
+  </div>
+  {% endblock %}

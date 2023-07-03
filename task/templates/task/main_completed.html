@@ -1,0 +1,30 @@
+  {% extends 'todo/base.html' %}
+
+  <!-- This is the completed tasks page, only deletion is possible in this page currently, can be modified per requirements -->
+
+  {% block title %}Completed Tasks{% endblock %}
+
+  {% block content %}
+  <div class="px-6 py-7 mb-2 bg-gray-200 rounded-lg">
+    <a class="p-1 font-medium">Here are your completed tasks!</a><br><br>
+    <a href="{% url 'task:view' %}" class="px-8 py-2 text-white bg-indigo-950 hover:bg-indigo-500 font-medium rounded-lg">Tasks</a>
+  </div>
+    <div class="p-2 bg-gray-200 rounded-lg">
+
+      <!-- looping through tasks where is_completed is True -->
+
+      {% for x in tasks %}
+          <div class="m-1 py-4 px-4 flex justify-between items-center border-2 border-indigo-950 rounded-lg">
+            <div>
+              <h1 class="text-lg line-through text-gray-400">{{ x.name }}</h1>
+            </div>
+
+            <div>
+              <a class="p-1 font-medium">created on: </a>
+              <a class="p-1">{{ x.created_on }}</a>
+              <a href="{% url 'task:delete' x.id %}" class="p-1 bg-gray-200 border-4 border-indigo-900 hover:border-red-600 rounded-lg">❌</a>
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+  {% endblock %}

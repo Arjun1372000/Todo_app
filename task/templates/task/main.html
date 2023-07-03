@@ -1,0 +1,44 @@
+  {% extends 'todo/base.html' %}
+
+  <!-- This is the task view page where ongoing tasks are displayed -->
+
+  {% block title %}Tasks{% endblock %}
+
+  {% block content %}
+  <div class="px-6 py-7 mb-2 bg-gray-200 rounded-lg">
+    <a class="p-1 font-medium">Here are your ongoing tasks!</a>
+  </div>
+    <div class="p-2 bg-gray-200 rounded-lg">
+
+      <!-- checks if the current user has any tasks -->
+
+      {% if tasks %}
+        {% for x in tasks %}
+            <a href="{% url 'task:update' x.id %}">
+              <div class="m-1 py-4 px-4 flex justify-between items-center border-2 border-indigo-950 rounded-lg">
+                <div>
+                  <h1 class="text-lg text-indigo-700">{{ x.name }}</h1>
+                  <p class="text-indigo-900">{{ x.description }}</p>
+                </div>
+
+                <div>
+                  <a class="p-1 font-medium">due date: </a>
+                  <a class="p-1">{{ x.due_date }}</a>
+                  <a href="{% url 'task:update' x.id %}" class="px-2 bg-gray-200 font-medium text-2xl hover:border-green-500 border-4 border-indigo-900 rounded-lg">🖎</a>
+                </div>
+              </div>
+            </a>
+        {% endfor %}
+
+      <!-- executed when user has no tasks -->
+
+      {% else %}
+        <h1 class="text-lg text-indigo-700 text-center">No Tasks</h1>
+      {% endif %}
+    </div>
+  <div class="px-6 py-7 mt-2 bg-gray-200 rounded-lg">
+    <a class="p-1 font-medium">want to add new task or delete completed tasks?</a><br><br>
+    <a href="{% url 'task:create' %}" class="p-2 text-white bg-indigo-500 hover:bg-indigo-950 font-medium rounded-lg">➕</a>
+    <a href="{% url 'task:completed' %}" class="px-8 py-2 text-white bg-indigo-950 hover:bg-indigo-500 font-medium rounded-lg">Completed Tasks</a>
+  </div>
+  {% endblock %}
